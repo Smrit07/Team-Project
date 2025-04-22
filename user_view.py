@@ -4,6 +4,11 @@ from auth import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 
+def logout(current_win):
+    if messagebox.askyesno("Logout", "Are you sure you want to logout?"):
+        current_win.destroy()
+        main()  # Go back to login screen
+
 def login():
     username = username_entry.get()
     password = password_entry.get()
@@ -11,7 +16,7 @@ def login():
 
     if role:
         user = get_user_details(username)
-        login_win.destroy()  # Close login window after success
+        login_win.destroy()
         if role == "admin":
             admin_dashboard(user)
         elif role == "student":
@@ -85,6 +90,7 @@ def admin_dashboard(user):
 
     tk.Button(frame, text="Add User", command=add_ui, width=20).pack(pady=5)
     tk.Button(frame, text="Delete User", command=delete_ui, width=20).pack(pady=5)
+    tk.Button(frame, text="Logout", command=lambda: logout(win), bg="red", fg="white", width=20).pack(pady=10)
 
     win.mainloop()
 
@@ -146,6 +152,7 @@ def student_dashboard(user):
 
     tk.Button(frame, text="View Info", command=view_info, width=20).pack(pady=5)
     tk.Button(frame, text="Update Info", command=update_info, width=20).pack(pady=5)
+    tk.Button(frame, text="Logout", command=lambda: logout(win), bg="red", fg="white", width=20).pack(pady=10)
 
     win.mainloop()
 
