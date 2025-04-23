@@ -19,6 +19,11 @@ def login():
     else:
         messagebox.showerror("Login Failed", "Invalid username or password.")
 
+def back_to_login(current_win):
+    current_win.quit()  # Stop the mainloop of the current window
+    current_win.destroy()  # Destroy the current window
+    main()  # Restart the login window
+
 def admin_dashboard(user):
     win = tk.Tk()
     win.title("Admin Dashboard")
@@ -83,6 +88,11 @@ def admin_dashboard(user):
         entry.pack()
         tk.Button(frame, text="Delete", command=submit).pack(pady=10)
 
+    # Back Button to return to Login screen
+    def go_back():
+        back_to_login(win)
+
+    tk.Button(frame, text="Back to Login", command=go_back, width=20).pack(pady=5)
     tk.Button(frame, text="Add User", command=add_ui, width=20).pack(pady=5)
     tk.Button(frame, text="Delete User", command=delete_ui, width=20).pack(pady=5)
 
@@ -144,6 +154,11 @@ def student_dashboard(user):
         name_entry.pack()
         tk.Button(frame, text="Submit", command=submit).pack(pady=10)
 
+    # Back Button to return to Login screen
+    def go_back():
+        back_to_login(win)
+
+    tk.Button(frame, text="Back to Login", command=go_back, width=20).pack(pady=5)
     tk.Button(frame, text="View Info", command=view_info, width=20).pack(pady=5)
     tk.Button(frame, text="Update Info", command=update_info, width=20).pack(pady=5)
 
